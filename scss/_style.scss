@@ -10,4 +10,14 @@
     justify-content: center;
     align-items: center;
     background-color: #FF99CC;
+    position: relative;
+    z-index: -2;
+}
+.bg_overlay{
+    border-radius: 100%;
+    background-color: #ffffff;
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: -1;
 }
