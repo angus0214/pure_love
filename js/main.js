@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  let width = 100;
+let width = 100;
 let perfData = window.performance.timing; // The PerformanceTiming interface represents timing-related performance information for the given page.
 let EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
 console.log(EstimatedTime);
@@ -315,3 +315,4 @@ svg.addEventListener('load', () => {
 // 375
   })
 
+  //#c194ff
