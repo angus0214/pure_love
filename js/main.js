@@ -50,6 +50,7 @@ $(document).ready(function () {
   // Fading Out Loadbar on Finised
   setTimeout(function () {
     $('.preloader-wrap').fadeOut(400);
+    $(".onepage-pagination").css("display","block");
   }, time);
 
   const svg = document.querySelector('#queen');
@@ -136,12 +137,14 @@ $(document).ready(function () {
           width: '100%',
           height: '100%',
           borderRadius: '0%',
+          
         },
         'bg'
       )
       .to('.bg_overlay', {
         opacity: 0,
         duration: 3,
+        zIndex:0
       });
     // animate girl
     firstFontTl
@@ -311,7 +314,11 @@ $(document).ready(function () {
     masterTl.add();
     masterTl.play();
   });
-  // 375
+  lottie.loadAnimation({
+    container: document.querySelector('.second_wrap'), // the dom element that will contain the animation
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: './svgdata/data.json', // the path to the animation json
+  });
 });
-
-//#c194ff
