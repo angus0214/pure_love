@@ -1,62 +1,36 @@
 $(document).ready(function () {
-  $('.main').onepage_scroll();
+  // preload start
   let width = 100;
   let perfData = window.performance.timing; // The PerformanceTiming interface represents timing-related performance information for the given page.
   let EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
-  console.log(EstimatedTime);
   let time = parseInt((EstimatedTime / 1000) % 60) * 100;
   let delaySeconds = time / 1000 + 1;
-  console.log(delaySeconds);
-  // Loadbar Animation
-  $('.loadbar').animate(
-    {
-      width: width + '%',
-    },
-    time
-  );
+  function preloadAnimate(time) {
+    console.log(delaySeconds);
+    // Loadbar Animation
+    $('.loadbar').animate(
+      {
+        width: width + '%',
+      },
+      time
+    );
 
-  // Loadbar Glow Animation
-  $('.glow').animate(
-    {
-      width: width + '%',
-    },
-    time
-  );
-
-  // Percentage Increment Animation
-  let PercentageID = $('#precent');
-  let start = 0;
-  let end = 100;
-  let durataion = time;
-  // animateValue(PercentageID, start, end, durataion);
-
-  function animateValue(id, start, end, duration) {
-    var range = end - start,
-      current = start,
-      increment = end > start ? 1 : -1,
-      stepTime = Math.abs(Math.floor(duration / range)),
-      obj = $(id);
-
-    var timer = setInterval(function () {
-      current += increment;
-      $(obj).text(current + '%');
-      //obj.innerHTML = current;
-      if (current == end) {
-        clearInterval(timer);
-      }
-    }, stepTime);
+    // Loadbar Glow Animation
+    $('.glow').animate(
+      {
+        width: width + '%',
+      },
+      time
+    );
   }
-
-  // Fading Out Loadbar on Finised
   setTimeout(function () {
     $('.preloader-wrap').fadeOut(400);
-    $(".onepage-pagination").css("display","block");
+    $('.onepage-pagination').css('display', 'block');
   }, time);
-
-  const svg = document.querySelector('#queen');
-
-  svg.addEventListener('load', () => {
-    const svgDoc = svg.contentDocument;
+  // preload end
+  // section queen animation start
+ $('#queen').on('load', () => {
+    const svgDoc = document.querySelector('#queen').contentDocument;
     const layout = svgDoc.querySelectorAll('svg > g');
     const fontFlashwhite = svgDoc.querySelector('#font_x5F_flashwhite');
     const font = svgDoc.querySelector('#font');
@@ -98,9 +72,6 @@ $(document).ready(function () {
     });
     const masterTl = gsap.timeline();
     const firstFontTl = gsap.timeline();
-    const secondFontTl = gsap.timeline();
-    const tl3 = gsap.timeline();
-    const bgTl = gsap.timeline();
     // label
     firstFontTl.addLabel('bg', delaySeconds + 3);
     firstFontTl.addLabel('girl', delaySeconds + 7);
@@ -137,14 +108,13 @@ $(document).ready(function () {
           width: '100%',
           height: '100%',
           borderRadius: '0%',
-          
         },
         'bg'
       )
       .to('.bg_overlay', {
         opacity: 0,
         duration: 3,
-        zIndex:0
+        zIndex: 0,
       });
     // animate girl
     firstFontTl
@@ -311,25 +281,26 @@ $(document).ready(function () {
       },
       'stars'
     );
-    masterTl.add();
-    masterTl.play();
   });
-  lottie.loadAnimation({
+  // section queen animation end
+  let section2Anim = lottie.loadAnimation({
     container: document.querySelector('.second_wrap'), // the dom element that will contain the animation
     renderer: 'svg',
     loop: true,
     autoplay: true,
     path: './svgdata/data.json', // the path to the animation json
   });
-  let circle = document.querySelector('.mouse');
-  function moveCircle(e){
-    gsap.to(circle,{
-      duration:0.1,
-      css:{
+  function moveCircle(e) {
+    gsap.to('.mouse', {
+      duration: 0.1,
+      css: {
         left: e.pageX,
-        top: e.pageY
-      }
-    })
+        top: e.pageY,
+      },
+    });
   }
+  preloadAnimate(time);
+  $('.main').onepage_scroll();
+  $('.second_wrap').on('mouseenter', section2Anim.play());
   $('.second_wrap').on('mousemove', moveCircle);
 });
