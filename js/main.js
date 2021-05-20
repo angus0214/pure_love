@@ -1,211 +1,250 @@
-$(document).ready(function(){
-let width = 100;
-let perfData = window.performance.timing; // The PerformanceTiming interface represents timing-related performance information for the given page.
-let EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
-console.log(EstimatedTime);
-let time = parseInt((EstimatedTime / 1000) % 60) * 100;
-let delaySeconds = time / 1000 + 1;
-console.log(delaySeconds);
-// Loadbar Animation
-$('.loadbar').animate(
-  {
-    width: width + '%',
-  },
-  time
-);
+$(document).ready(function () {
+  $('.main').onepage_scroll();
+  let width = 100;
+  let perfData = window.performance.timing; // The PerformanceTiming interface represents timing-related performance information for the given page.
+  let EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
+  console.log(EstimatedTime);
+  let time = parseInt((EstimatedTime / 1000) % 60) * 100;
+  let delaySeconds = time / 1000 + 1;
+  console.log(delaySeconds);
+  // Loadbar Animation
+  $('.loadbar').animate(
+    {
+      width: width + '%',
+    },
+    time
+  );
 
-// Loadbar Glow Animation
-$('.glow').animate(
-  {
-    width: width + '%',
-  },
-  time
-);
+  // Loadbar Glow Animation
+  $('.glow').animate(
+    {
+      width: width + '%',
+    },
+    time
+  );
 
-// Percentage Increment Animation
-let PercentageID = $('#precent');
-let start = 0;
-let end = 100;
-let durataion = time;
-// animateValue(PercentageID, start, end, durataion);
+  // Percentage Increment Animation
+  let PercentageID = $('#precent');
+  let start = 0;
+  let end = 100;
+  let durataion = time;
+  // animateValue(PercentageID, start, end, durataion);
 
-function animateValue(id, start, end, duration) {
-  var range = end - start,
-    current = start,
-    increment = end > start ? 1 : -1,
-    stepTime = Math.abs(Math.floor(duration / range)),
-    obj = $(id);
+  function animateValue(id, start, end, duration) {
+    var range = end - start,
+      current = start,
+      increment = end > start ? 1 : -1,
+      stepTime = Math.abs(Math.floor(duration / range)),
+      obj = $(id);
 
-  var timer = setInterval(function () {
-    current += increment;
-    $(obj).text(current + '%');
-    //obj.innerHTML = current;
-    if (current == end) {
-      clearInterval(timer);
-    }
-  }, stepTime);
-}
+    var timer = setInterval(function () {
+      current += increment;
+      $(obj).text(current + '%');
+      //obj.innerHTML = current;
+      if (current == end) {
+        clearInterval(timer);
+      }
+    }, stepTime);
+  }
 
-// Fading Out Loadbar on Finised
-setTimeout(function () {
-  $('.preloader-wrap').fadeOut(400);
-}, time);
+  // Fading Out Loadbar on Finised
+  setTimeout(function () {
+    $('.preloader-wrap').fadeOut(400);
+  }, time);
 
-const svg = document.querySelector('#queen');
+  const svg = document.querySelector('#queen');
 
-svg.addEventListener('load', () => {
-  const svgDoc = svg.contentDocument;
-  const layout = svgDoc.querySelectorAll('svg > g');
-  const fontFlashwhite = svgDoc.querySelector('#font_x5F_flashwhite');
-  const font = svgDoc.querySelector('#font');
-  const fontBg = svgDoc.querySelector('#font_x5F_back');
-  const rightarm = svgDoc.querySelector('#rightarm');
-  const leftarm = svgDoc.querySelector('#leftarm');
-  const arms = [rightarm, leftarm];
-  const girl = svgDoc.querySelectorAll('#girl,#mouth');
-  const line = svgDoc.querySelectorAll(
-    '#font_x5F_rightline,#font_x5F_leftline'
-  );
-  const leftStarLine = svgDoc.querySelectorAll(
-    '#font_x5F_leftstar_x5F_tail,#font_x5F_leftstar'
-  );
-  const leftStar = svgDoc.querySelector('#font_x5F_leftstar');
-  const rightStarLine = svgDoc.querySelectorAll(
-    '#font_x5F_rightstar_x5F_tail,#font_x5F_rightstar'
-  );
-  const rightStar = svgDoc.querySelector('#font_x5F_rightstar');
-  const halfUpRightStar = svgDoc.querySelectorAll(
-    '#halfup_x5F_rightstar_x5F_tail,#halfup_x5F_rightstar'
-  );
-  const halfUpLeftStar = svgDoc.querySelectorAll(
-    '#halfup_x5F_leftstar_x5F_tail,#halfup_x5F_leftstar'
-  );
-  const halfdownLeftStar = svgDoc.querySelectorAll(
-    '#halfdown_x5F_leftstar_x5F_tail,#halfdown_x5F_leftstar'
-  );
-  const halfdownRightStar = svgDoc.querySelectorAll(
-    '#halfdown_x5F_rightstar_x5F_tail,#halfdown_x5F_rightstar'
-  );
-  const halfdownMidStar = svgDoc.querySelectorAll(
-    '#halfdown_x5F_midstar_x5F_tail,#halfdown_x5F_midstar'
-  );
-  // const bg_overlay = querySelector('.bg_overlay')
-  console.log(layout);
-  gsap.set(svg, { css: { zIndex: 5 } });
-  gsap.set(layout, {
-    opacity: 0,
-  });
-  const masterTl = gsap.timeline();
-  const firstFontTl = gsap.timeline();
-  const secondFontTl = gsap.timeline();
-  const tl3 = gsap.timeline();
-  const bgTl = gsap.timeline();
-  // label
-  firstFontTl.addLabel('bg', delaySeconds + 3);
-  firstFontTl.addLabel('girl', delaySeconds + 7);
-  firstFontTl.addLabel('stars', delaySeconds + 8);
-  // animate font
-  firstFontTl
-    .to(fontFlashwhite, {
-      delay: delaySeconds,
-      duration: 1.5,
-      opacity: 1,
-    })
-    .to(fontFlashwhite, {
-      duration: 1.5,
+  svg.addEventListener('load', () => {
+    const svgDoc = svg.contentDocument;
+    const layout = svgDoc.querySelectorAll('svg > g');
+    const fontFlashwhite = svgDoc.querySelector('#font_x5F_flashwhite');
+    const font = svgDoc.querySelector('#font');
+    const fontBg = svgDoc.querySelector('#font_x5F_back');
+    const rightarm = svgDoc.querySelector('#rightarm');
+    const leftarm = svgDoc.querySelector('#leftarm');
+    const arms = [rightarm, leftarm];
+    const girl = svgDoc.querySelectorAll('#girl,#mouth');
+    const line = svgDoc.querySelectorAll(
+      '#font_x5F_rightline,#font_x5F_leftline'
+    );
+    const leftStarLine = svgDoc.querySelectorAll(
+      '#font_x5F_leftstar_x5F_tail,#font_x5F_leftstar'
+    );
+    const leftStar = svgDoc.querySelector('#font_x5F_leftstar');
+    const rightStarLine = svgDoc.querySelectorAll(
+      '#font_x5F_rightstar_x5F_tail,#font_x5F_rightstar'
+    );
+    const rightStar = svgDoc.querySelector('#font_x5F_rightstar');
+    const halfUpRightStar = svgDoc.querySelectorAll(
+      '#halfup_x5F_rightstar_x5F_tail,#halfup_x5F_rightstar'
+    );
+    const halfUpLeftStar = svgDoc.querySelectorAll(
+      '#halfup_x5F_leftstar_x5F_tail,#halfup_x5F_leftstar'
+    );
+    const halfdownLeftStar = svgDoc.querySelectorAll(
+      '#halfdown_x5F_leftstar_x5F_tail,#halfdown_x5F_leftstar'
+    );
+    const halfdownRightStar = svgDoc.querySelectorAll(
+      '#halfdown_x5F_rightstar_x5F_tail,#halfdown_x5F_rightstar'
+    );
+    const halfdownMidStar = svgDoc.querySelectorAll(
+      '#halfdown_x5F_midstar_x5F_tail,#halfdown_x5F_midstar'
+    );
+    // const bg_overlay = querySelector('.bg_overlay')
+    console.log(layout);
+    gsap.set(layout, {
       opacity: 0,
-    })
-    .to(
-      font,
-      {
+    });
+    const masterTl = gsap.timeline();
+    const firstFontTl = gsap.timeline();
+    const secondFontTl = gsap.timeline();
+    const tl3 = gsap.timeline();
+    const bgTl = gsap.timeline();
+    // label
+    firstFontTl.addLabel('bg', delaySeconds + 3);
+    firstFontTl.addLabel('girl', delaySeconds + 7);
+    firstFontTl.addLabel('stars', delaySeconds + 8);
+    // animate font
+    firstFontTl
+      .to(fontFlashwhite, {
+        delay: delaySeconds,
         duration: 1.5,
         opacity: 1,
-      },
-      '<'
-    )
-    .to(fontBg, {
-      duration: 0.3,
-      opacity: 1,
-    });
-  // animate bg
-  firstFontTl
-    .to(
-      '.bg_overlay',
+      })
+      .to(fontFlashwhite, {
+        duration: 1.5,
+        opacity: 0,
+      })
+      .to(
+        font,
+        {
+          duration: 1.5,
+          opacity: 1,
+        },
+        '<'
+      )
+      .to(fontBg, {
+        duration: 0.3,
+        opacity: 1,
+      });
+    // animate bg
+    firstFontTl
+      .to(
+        '.bg_overlay',
+        {
+          duration: 1,
+          width: '100%',
+          height: '100%',
+          borderRadius: '0%',
+        },
+        'bg'
+      )
+      .to('.bg_overlay', {
+        opacity: 0,
+        duration: 3,
+      });
+    // animate girl
+    firstFontTl
+      .fromTo(
+        girl,
+        {
+          y: 375,
+        },
+        {
+          y: 0,
+          duration: 1,
+        },
+        'girl'
+      )
+      .to(
+        girl,
+        {
+          delay: 0.6,
+          opacity: 1,
+          duration: 0.4,
+        },
+        '<'
+      );
+    // animate arms
+    firstFontTl.fromTo(
+      arms,
       {
-        duration: 1,
-        width: '100%',
-        height: '100%',
-        borderRadius: '0%',
-      },
-      'bg'
-    )
-    .to('.bg_overlay', {
-      opacity: 0,
-      duration: 3,
-      display: 'none',
-    });
-  // animate girl
-  firstFontTl
-    .fromTo(
-      girl,
-      {
-        y: 375,
+        y: -345,
       },
       {
         y: 0,
+        opacity: 1,
         duration: 1,
       },
       'girl'
-    )
-    .to(
-      girl,
-      {
-        delay: 0.6,
-        opacity: 1,
-        duration: 0.4,
-      },
-      '<'
     );
-  // animate arms
-  firstFontTl.fromTo(
-    arms,
-    {
-      y: -345,
-    },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'girl'
-  );
-  // animate font line
-  firstFontTl.to(
-    line,
-    {
-      opacity: 1,
-      duration: 1,
-    },
-    'girl'
-  );
-  // animate star line
-  firstFontTl
-    .to(
-      leftStar,
+    // animate font line
+    firstFontTl.to(
+      line,
       {
-        duration: 4,
-        rotation: '+=360',
-        repeat: -1,
-        transformOrigin: '50% 50%',
-        ease: Linear.easeNone,
+        opacity: 1,
+        duration: 1,
       },
       'girl'
-    )
-    .fromTo(
-      leftStarLine,
+    );
+    // animate star line
+    firstFontTl
+      .to(
+        leftStar,
+        {
+          duration: 4,
+          rotation: '+=360',
+          repeat: -1,
+          transformOrigin: '50% 50%',
+          ease: Linear.easeNone,
+        },
+        'girl'
+      )
+      .fromTo(
+        leftStarLine,
+        {
+          x: 80,
+          y: -30,
+        },
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+        },
+        'girl'
+      );
+    firstFontTl
+      .to(
+        rightStar,
+        {
+          duration: 4,
+          rotation: '+=360',
+          repeat: -1,
+          transformOrigin: '50% 50%',
+          ease: Linear.easeNone,
+        },
+        'girl'
+      )
+      .fromTo(
+        rightStarLine,
+        {
+          x: -80,
+          y: 30,
+        },
+        {
+          x: 0,
+          y: 0,
+          opacity: 1,
+          duration: 1,
+        },
+        'girl'
+      );
+    firstFontTl.fromTo(
+      halfUpRightStar,
       {
-        x: 80,
-        y: -30,
+        x: -150,
+        y: 150,
       },
       {
         x: 0,
@@ -213,25 +252,13 @@ svg.addEventListener('load', () => {
         opacity: 1,
         duration: 1,
       },
-      'girl'
+      'stars'
     );
-  firstFontTl
-    .to(
-      rightStar,
+    firstFontTl.fromTo(
+      halfUpLeftStar,
       {
-        duration: 4,
-        rotation: '+=360',
-        repeat: -1,
-        transformOrigin: '50% 50%',
-        ease: Linear.easeNone,
-      },
-      'girl'
-    )
-    .fromTo(
-      rightStarLine,
-      {
-        x: -80,
-        y: 30,
+        x: 150,
+        y: 150,
       },
       {
         x: 0,
@@ -239,80 +266,52 @@ svg.addEventListener('load', () => {
         opacity: 1,
         duration: 1,
       },
-      'girl'
+      'stars'
     );
-  firstFontTl.fromTo(
-    halfUpRightStar,
-    {
-      x: -150,
-      y: 150,
-    },
-    {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'stars'
-  );
-  firstFontTl.fromTo(
-    halfUpLeftStar,
-    {
-      x: 150,
-      y: 150,
-    },
-    {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'stars'
-  );
-  firstFontTl.fromTo(
-    halfdownLeftStar,
-    {
-      x: 118,
-      y: -150,
-    },
-    {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'stars'
-  );
-  firstFontTl.fromTo(
-    halfdownRightStar,
-    {
-      x: -118,
-      y: -150,
-    },
-    {
-      x: 0,
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'stars'
-  );
-  firstFontTl.fromTo(
-    halfdownMidStar,
-    {
-      y: -150,
-    },
-    {
-      y: 0,
-      opacity: 1,
-      duration: 1,
-    },
-    'stars'
-  );
-  masterTl.add();
-  masterTl.play();
+    firstFontTl.fromTo(
+      halfdownLeftStar,
+      {
+        x: 118,
+        y: -150,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+      },
+      'stars'
+    );
+    firstFontTl.fromTo(
+      halfdownRightStar,
+      {
+        x: -118,
+        y: -150,
+      },
+      {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        duration: 1,
+      },
+      'stars'
+    );
+    firstFontTl.fromTo(
+      halfdownMidStar,
+      {
+        y: -150,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+      },
+      'stars'
+    );
+    masterTl.add();
+    masterTl.play();
+  });
+  // 375
 });
-// 375
-  })
 
-  //#c194ff
+//#c194ff
