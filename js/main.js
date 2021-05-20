@@ -321,4 +321,15 @@ $(document).ready(function () {
     autoplay: true,
     path: './svgdata/data.json', // the path to the animation json
   });
+  let circle = document.querySelector('.mouse');
+  function moveCircle(e){
+    gsap.to(circle,{
+      duration:0.1,
+      css:{
+        left: e.pageX,
+        top: e.pageY
+      }
+    })
+  }
+  $('.second_wrap').on('mousemove', moveCircle);
 });
