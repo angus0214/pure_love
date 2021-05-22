@@ -284,11 +284,11 @@ $(document).ready(function () {
   });
   // section queen animation end
   let section2Anim = lottie.loadAnimation({
-    container: document.querySelector('.second_wrap'), // the dom element that will contain the animation
+    container: document.querySelector('.second_anim'), // the dom element that will contain the animation
     renderer: 'svg',
     loop: true,
     autoplay: true,
-    path: './svgdata/data.json', // the path to the animation json
+    path: './svgdata/secondSection/data.json', // the path to the animation json
   });
   function moveCircle(e) {
     gsap.to('.mouse', {
