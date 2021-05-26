@@ -29,7 +29,7 @@ $(document).ready(function () {
   }, time);
   // preload end
   // section queen animation start
- $('#queen').on('load', () => {
+  $('#queen').on('load', () => {
     const svgDoc = document.querySelector('#queen').contentDocument;
     const layout = svgDoc.querySelectorAll('svg > g');
     const fontFlashwhite = svgDoc.querySelector('#font_x5F_flashwhite');
@@ -66,7 +66,7 @@ $(document).ready(function () {
       '#halfdown_x5F_midstar_x5F_tail,#halfdown_x5F_midstar'
     );
     // const bg_overlay = querySelector('.bg_overlay')
-    console.log(layout);
+    // console.log(layout);
     gsap.set(layout, {
       opacity: 0,
     });
@@ -289,6 +289,7 @@ $(document).ready(function () {
     autoplay: true,
     path: './svgdata/secondSection/data.json', // the path to the animation json
   });
+
   function moveCircle(e) {
     gsap.to('.mouse', {
       duration: 0.1,
@@ -299,7 +300,46 @@ $(document).ready(function () {
     });
   }
   preloadAnimate(time);
-  $('.main').onepage_scroll();
+  $('.main').onepage_scroll({
+    beforeMove: function (index) {
+      if (index === 2) {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          '.bg_gradient',
+          {
+            backgroundColor: '#ff99cc',
+          },
+          {
+            backgroundColor: '#c194ff',
+            duration: 1,
+          }
+        );
+        gsap.set('.font-box p', {
+          opacity: 0,
+        });
+      }
+      if (index === 1) {
+        gsap.set('.queen_warp', {
+          backgroundColor: '#ff99cc',
+        });
+      }
+    },
+    afterMove: function (index) {
+      if (index === 2) {
+        const tl = gsap.timeline();
+        tl.fromTo(
+          '.font-box p',
+          {
+            opacity: 0,
+          },
+          {
+            opacity: 1,
+            duration: 0,
+          }
+        );
+      }
+    },
+  });
   $('.second_wrap').on('mouseenter', section2Anim.play());
   $('.second_wrap').on('mousemove', moveCircle);
 });
