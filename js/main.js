@@ -4,7 +4,7 @@ $(document).ready(function () {
   let perfData = window.performance.timing; // The PerformanceTiming interface represents timing-related performance information for the given page.
   let EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart);
   let time = parseInt((EstimatedTime / 1000) % 60) * 100;
-  let delaySeconds = time / 1000 + 1;
+  let delaySeconds = time / 1000 + 0.2;
   function preloadAnimate(time) {
     console.log(delaySeconds);
     // Loadbar Animation
@@ -70,7 +70,6 @@ $(document).ready(function () {
     gsap.set(layout, {
       opacity: 0,
     });
-    const masterTl = gsap.timeline();
     const firstFontTl = gsap.timeline();
     // label
     firstFontTl.addLabel('bg', delaySeconds + 3);
