@@ -20,8 +20,8 @@
 
 .loader,
 .percentage {
-  height: 20px;
-  max-width: 200px;
+  height: 40px;
+  max-width: 300px;
   border: 2px solid #000000;
   border-radius: 20px;
   font-weight: 300;
@@ -59,7 +59,7 @@
   width: 0%;
   height: 100%;
   background: #ff99cc; /* Stripes Background Gradient */
-  box-shadow: 0px 0px 14px 1px #ff99cc;
+  box-shadow: 0px 0px 30px 1px #ff99cc;
   position: absolute;
   top: 0;
   left: 0;

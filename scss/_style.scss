@@ -37,7 +37,7 @@
     align-items: center;
     p {
       writing-mode: vertical-lr;
-      font-size: 4.5rem;
+      font-size: 9.5rem;
       font-weight: 600;
       color: #c194ff;
       position: relative;
@@ -54,7 +54,7 @@
     z-index: 2;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: 1440px) {
   .second_wrap {
     .font-box:nth-child(1) {
         justify-content: flex-start;
