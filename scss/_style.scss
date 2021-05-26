@@ -38,7 +38,7 @@
     align-items: center;
     p {
       writing-mode: vertical-lr;
-      font-size: 9.5rem;
+      font-size: 9rem;
       font-weight: 600;
       color: #c194ff;
       opacity: 1;
@@ -47,6 +47,8 @@
     }
   }
   .mouse {
+    top: 50%;
+    left: 50%;
     position: absolute;
     width: 100vh;
     height: 100vh;
