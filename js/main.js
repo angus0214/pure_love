@@ -289,7 +289,7 @@ $(document).ready(function () {
     autoplay: true,
     path: './svgdata/secondSection/data.json', // the path to the animation json
   });
-
+  // mouse folllower
   function moveCircle(e) {
     gsap.to('.mouse', {
       duration: 0.1,
@@ -299,6 +299,52 @@ $(document).ready(function () {
       },
     });
   }
+  // section card animation
+  // first-bg
+  const cardFirstIntro = gsap.timeline({ paused: true });
+  $('#card').on('load', function () {
+    const svgDoc = document.querySelector('#card').contentDocument;
+    const firstSlogan = svgDoc.querySelector('#first-slogan');
+    const secondSlogan = svgDoc.querySelector('#second-slogan');
+    const faigibai = svgDoc.querySelector('#faigibai');
+    const first_card = svgDoc.querySelectorAll(
+      '#first-name,#first-bg,#faigibai'
+    );
+    const liunhuayi = svgDoc.querySelector('#liunhuayi');
+    console.log(first_card);
+    gsap.set(firstSlogan, { xPercent: 120 });
+    gsap.set(secondSlogan, { xPercent: 160 });
+    gsap.set(faigibai, { transformOrigin: '50% 50%', rotate: -10 });
+    gsap.set(liunhuayi, { transformOrigin: '50% 50%', rotate: -10 });
+    const firstIntro = gsap.timeline();
+    firstIntro.to(firstSlogan, { xPercent: -40, duration: 2 });
+    firstIntro.to(faigibai, { rotate: 0, duration: 2 }, '<');
+    cardFirstIntro.add(firstIntro);
+    const oneToTwo = gsap.timeline({ paused: true });
+    oneToTwo.to(firstSlogan, { xPercent: -200, duration: 0.5 });
+    oneToTwo.to(first_card, { x: -1200, duration: 0.8 });
+    oneToTwo.to(secondSlogan, {
+      xPercent: -20,
+      duration: 2,
+      ease: 'power3.out',
+    });
+    oneToTwo.to(
+      liunhuayi,
+      {
+        rotate: 0,
+        duration: 2,
+      },
+      '<'
+    );
+    $('.right_arrow').click(function () {
+      console.log('11111');
+      oneToTwo.play();
+    });
+    $('.left_arrow').click(function () {
+      console.log('22222');
+      oneToTwo.reverse();
+    });
+  });
   preloadAnimate(time);
   $('.main').onepage_scroll({
     beforeMove: function (index) {
@@ -337,6 +383,10 @@ $(document).ready(function () {
             duration: 0,
           }
         );
+      }
+      if (index == 3) {
+        // console.log('3');
+        cardFirstIntro.play();
       }
     },
   });
